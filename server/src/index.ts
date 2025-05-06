@@ -1,7 +1,6 @@
+#!/usr/bin/env node
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { HttpServerTransport } from "@modelcontextprotocol/sdk/server/http.js";
-
-console.log("🚀 index.ts started"); // تأكيد إن الملف شغال
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 async function main() {
   try {
@@ -23,31 +22,12 @@ async function main() {
       };
     });
 
-    // إعداد النقل عبر HTTP
-    const transport = new HttpServerTransport({ port: 3001 });
-
-    // الاتصال بالسيرفر
-    await server.connect(transport);
-
-    console.log("✅ MCP HTTP server running on http://localhost:3001");
-
+    await server.connect(new StdioServerTransport());
     // إبقاء السيرفر حي عن طريق interval
-    const interval = setInterval(() => {
-      console.log("⏳ Server is still alive...");
-    }, 5000);
 
     // عند إغلاق السيرفر يتم إيقاف الـ interval
-    process.on('SIGINT', async () => {
-      clearInterval(interval);
-      console.log("✅ Server stopped.");
-
-      // تأكد من إغلاق السيرفر بشكل سليم
-      await server.disconnect();
-      process.exit();
-    });
   } catch (err) {
-    console.error("❌ Error during server startup:", err);
   }
 }
 
-main();  // <-- ضروري تتنفذ هنا
+main(); // <-- ضروري تتنفذ هنا
