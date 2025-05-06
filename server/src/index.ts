@@ -22,11 +22,25 @@ async function main() {
       };
     });
 
+    // الاتصال بنقل البيانات عبر الـ StdioServerTransport
     await server.connect(new StdioServerTransport());
+    
+    // التأكد من أن السيرفر بدأ
+    console.log("✅ MCP Server is running...");
+
     // إبقاء السيرفر حي عن طريق interval
+    setInterval(() => {
+      console.log("⏳ Server is still alive...");
+    }, 5000);
 
     // عند إغلاق السيرفر يتم إيقاف الـ interval
+    process.on('SIGINT', () => {
+      console.log("✅ Server stopped.");
+      process.exit();
+    });
+
   } catch (err) {
+    console.error("❌ Error during server startup:", err);
   }
 }
 
