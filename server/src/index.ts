@@ -1,5 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { HttpServerTransport } from "@modelcontextprotocol/sdk/server/http.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 console.log("🚀 index.ts started"); // تأكيد إن الملف شغال
 
@@ -24,7 +24,7 @@ async function main() {
     });
 
     // إعداد النقل عبر HTTP
-    const transport = new HttpServerTransport({ port: 3001 });
+    const transport = new StdioServerTransport();
 
     // الاتصال بالسيرفر
     await server.connect(transport);
@@ -37,12 +37,12 @@ async function main() {
     }, 5000);
 
     // عند إغلاق السيرفر يتم إيقاف الـ interval
-    process.on('SIGINT', async () => {
+    process.on("SIGINT", async () => {
       clearInterval(interval);
       console.log("✅ Server stopped.");
 
       // تأكد من إغلاق السيرفر بشكل سليم
-      await server.disconnect();
+      //   await server.disconnect();
       process.exit();
     });
   } catch (err) {
@@ -50,4 +50,4 @@ async function main() {
   }
 }
 
-main();  // <-- ضروري تتنفذ هنا
+main(); // <-- ضروري تتنفذ هنا
