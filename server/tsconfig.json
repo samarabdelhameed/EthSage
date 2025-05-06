@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",                      // أحدث إصدار من JavaScript
+    "module": "ESNext",                      // يدعم ESM
+    "lib": ["ESNext"],                       // مكتبة الميزات الحديثة
+    "moduleResolution": "node",              // يتوافق مع Node.js و bun و vite
+    "allowImportingTsExtensions": true,      // يسمح بإستيراد ملفات .ts مباشرة
+    "esModuleInterop": true,                 // التوافق مع الاستيراد من مكتبات JavaScript
+    "resolveJsonModule": true,               // يسمح بالاستيراد من ملفات JSON
+    "noEmit": true,                          // لا يقوم بإخراج ملفات js
+    "strict": true,                          // تحسين الجودة في الكود (التقيد بالقواعد)
+    "skipLibCheck": true,                    // تجاهل التحقق من أنواع المكتبات
+    "noUnusedLocals": false,                 // يسمح بوجود متغيرات غير مستخدمة (يمكنك تفعيلها حسب الحاجة)
+    "noUnusedParameters": false,             // يسمح بوجود معلمات غير مستخدمة (يمكنك تفعيلها حسب الحاجة)
+    "noFallthroughCasesInSwitch": true,      // ضمان أن جميع الحالات في switch تحتوي على break
+    "noUncheckedIndexedAccess": true,        // التحقق من الوصول إلى العناصر في المصفوفات
+    "forceConsistentCasingInFileNames": true // التأكد من التوافق بين الحروف الكبيرة والصغيرة في أسماء الملفات
+  },
+  "include": ["./**/*.ts"],                  // يشمل كل ملفات TypeScript في المشروع
+  "exclude": ["node_modules"]                // استبعاد مجلد node_modules
+}
